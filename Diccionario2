@@ -1,0 +1,629 @@
+# =============================================================================
+# SECCIÓN 1: ACCESO BÁSICO A VALORES POR CLAVE
+# =============================================================================
+# Comentario de sección para organizar el código
+
+def obtener_valores():
+    # Define una función llamada obtener_valores que no recibe parámetros
+    """
+    Demuestra el acceso directo a valores usando claves.
+    IMPORTANTE: Si la clave no existe, se produce un KeyError.
+    """
+    # Docstring de la función: explica qué hace la función
+    
+    print("=== SECCIÓN 1: Acceso básico a valores ===")
+    # Imprime un título descriptivo en la consola
+    
+    # Diccionario con alturas de edificios en metros
+    # Comentario que explica qué representa el diccionario siguiente
+    building_heights = {
+        # Se crea un diccionario y se asigna a la variable building_heights
+        "Burj Khalifa": 828,
+        # Clave: "Burj Khalifa", Valor: 828 (altura en metros)
+        "Shanghai Tower": 632,
+        # Clave: "Shanghai Tower", Valor: 632 (altura en metros)
+        "Abraj Al Bait": 601,
+        # Clave: "Abraj Al Bait", Valor: 601 (altura en metros)
+        "Ping An": 599,
+        # Clave: "Ping An", Valor: 599 (altura en metros)
+        "Lotte World Tower": 554.5,
+        # Clave: "Lotte World Tower", Valor: 554.5 (altura en metros, número decimal)
+        "One World Trade": 541.3
+        # Clave: "One World Trade", Valor: 541.3 (altura en metros, número decimal)
+    }
+    # Fin de la definición del diccionario
+    
+    # Acceso directo: diccionario[clave]
+    # Comentario explicando el método de acceso que se usará
+    print(f"Altura del Burj Khalifa: {building_heights['Burj Khalifa']} metros")
+    # Accede al valor usando la clave 'Burj Khalifa' e imprime el resultado en formato string
+    print(f"Altura del Ping An: {building_heights['Ping An']} metros")
+    # Accede al valor usando la clave 'Ping An' e imprime el resultado en formato string
+    
+    # Diccionario con listas como valores
+    # Comentario que explica que los valores serán listas en lugar de números
+    zodiac_elements = {
+        # Se crea un nuevo diccionario llamado zodiac_elements
+        "water": ["Cancer", "Scorpio", "Pisces"],
+        # Clave: "water", Valor: lista con 3 signos zodiacales
+        "fire": ["Aries", "Leo", "Sagittarius"], 
+        # Clave: "fire", Valor: lista con 3 signos zodiacales
+        "earth": ["Taurus", "Virgo", "Capricorn"],
+        # Clave: "earth", Valor: lista con 3 signos zodiacales
+        "air": ["Gemini", "Libra", "Aquarius"]
+        # Clave: "air", Valor: lista con 3 signos zodiacales
+    }
+    # Fin de la definición del diccionario zodiac_elements
+    
+    # Los valores pueden ser cualquier tipo de objeto (aquí listas)
+    # Comentario explicando que los diccionarios pueden contener cualquier tipo de dato
+    print(f"Signos de tierra: {zodiac_elements['earth']}")
+    # Accede a la lista asociada con 'earth' y la imprime
+    print(f"Signos de fuego: {zodiac_elements['fire']}")
+    # Accede a la lista asociada con 'fire' y la imprime
+    print()
+    # Imprime una línea en blanco para separar secciones
+
+# =============================================================================
+# SECCIÓN 2: VERIFICACIÓN DE EXISTENCIA Y MÉTODO GET()
+# =============================================================================
+# Comentario de separación para la segunda sección
+
+def obtener_con_comprobacion():
+    # Define una nueva función sin parámetros
+    """
+    Demuestra cómo verificar si una clave existe antes de acceder
+    y el uso del método get() para acceso seguro.
+    """
+    # Docstring explicando el propósito de esta función
+    
+    print("=== SECCIÓN 2: Verificación de claves y get() ===")
+    # Imprime el título de esta sección
+    
+    building_heights = {
+        # Crea el mismo diccionario de alturas de edificios
+        "Burj Khalifa": 828,
+        # Par clave-valor: nombre del edificio y su altura
+        "Shanghai Tower": 632,
+        # Par clave-valor: nombre del edificio y su altura
+        "Abraj Al Bait": 601,
+        # Par clave-valor: nombre del edificio y su altura
+        "Ping An": 599,
+        # Par clave-valor: nombre del edificio y su altura
+        "Lotte World Tower": 554.5,
+        # Par clave-valor: nombre del edificio y su altura
+        "One World Trade": 541.3
+        # Par clave-valor: nombre del edificio y su altura
+    }
+    # Fin de la creación del diccionario
+    
+    # MÉTODO 1: Verificar existencia con 'in' antes de acceder
+    # Comentario explicando la primera técnica de verificación
+    key_to_check = "Landmark 81"
+    # Asigna el string "Landmark 81" a la variable key_to_check
+    if key_to_check in building_heights:
+        # Verifica si la clave existe en el diccionario usando el operador 'in'
+        print(f"Altura de {key_to_check}: {building_heights[key_to_check]}")
+        # Si existe, accede al valor e imprime la información
+    else:
+        # Si la clave no existe, ejecuta este bloque
+        print(f"❌ {key_to_check} no se encuentra en la base de datos")
+        # Imprime un mensaje de error indicando que la clave no existe
+    
+    # Agregar una nueva clave al diccionario de zodíaco
+    # Comentario explicando que se modificará el diccionario
+    zodiac_elements = {
+        # Crea nuevamente el diccionario de elementos zodiacales
+        "water": ["Cancer", "Scorpio", "Pisces"],
+        # Elemento agua con sus signos correspondientes
+        "fire": ["Aries", "Leo", "Sagittarius"],
+        # Elemento fuego con sus signos correspondientes
+        "earth": ["Taurus", "Virgo", "Capricorn"],
+        # Elemento tierra con sus signos correspondientes
+        "air": ["Gemini", "Libra", "Aquarius"]
+        # Elemento aire con sus signos correspondientes
+    }
+    # Fin de la definición del diccionario
+    
+    zodiac_elements["energy"] = "Not a Zodiac element"
+    # Agrega una nueva clave "energy" con el valor "Not a Zodiac element"
+    if "energy" in zodiac_elements:
+        # Verifica si la clave "energy" existe en el diccionario
+        print(f"Elemento energy: {zodiac_elements['energy']}")
+        # Si existe, imprime su valor
+    
+    # MÉTODO 2: Usar get() - más seguro y limpio
+    # Comentario explicando el segundo método de acceso seguro
+    print(f"Shanghai Tower (con get()): {building_heights.get('Shanghai Tower')}")
+    # Usa get() para acceder al valor. Si existe, lo retorna; si no, retorna None
+    print(f"My House (con get()): {building_heights.get('My House')}")
+    # Usa get() con una clave inexistente. Retorna None sin generar error
+    print()
+    # Imprime una línea en blanco
+
+# =============================================================================
+# SECCIÓN 3: GET() CON VALORES POR DEFECTO
+# =============================================================================
+# Separador para la tercera sección
+
+def uso_get_seguro():
+    # Define la función uso_get_seguro sin parámetros
+    """
+    Demuestra el uso de get() con valores por defecto.
+    get(clave, valor_defecto) retorna valor_defecto si la clave no existe.
+    """
+    # Docstring explicando la funcionalidad de get() con valores por defecto
+    
+    print("=== SECCIÓN 3: get() con valores por defecto ===")
+    # Imprime el título de la sección
+    
+    user_ids = {
+        # Crea un diccionario con IDs de usuarios
+        "teraCoder": 100019,
+        # Usuario "teraCoder" tiene ID 100019
+        "pythonGuy": 182921,
+        # Usuario "pythonGuy" tiene ID 182921
+        "samTheJavaMaam": 123112,
+        # Usuario "samTheJavaMaam" tiene ID 123112
+        "lyleLoop": 102931,
+        # Usuario "lyleLoop" tiene ID 102931
+        "keysmithKeith": 129384
+        # Usuario "keysmithKeith" tiene ID 129384
+    }
+    # Fin de la definición del diccionario user_ids
+    
+    # Si la clave existe, retorna su valor
+    # Comentario explicando qué sucede cuando la clave existe
+    tc_id = user_ids.get("teraCoder", 1000)
+    # Usa get() con "teraCoder" (existe) y valor por defecto 1000. Retorna 100019
+    print(f"ID de teraCoder: {tc_id}")
+    # Imprime el ID obtenido (será 100019, no 1000)
+    
+    # Si la clave no existe, retorna el valor por defecto
+    # Comentario explicando qué sucede cuando la clave no existe
+    stack_id = user_ids.get("superStackSmash", 100000)
+    # Usa get() con "superStackSmash" (no existe) y valor por defecto 100000. Retorna 100000
+    print(f"ID de superStackSmash: {stack_id}")
+    # Imprime el valor por defecto (100000) porque la clave no existe
+    print()
+    # Línea en blanco para separación
+
+# =============================================================================
+# SECCIÓN 4: ELIMINAR ELEMENTOS CON POP()
+# =============================================================================
+# Separador para la cuarta sección
+
+def eliminar_claves():
+    # Define la función eliminar_claves sin parámetros
+    """
+    Demuestra el uso de pop() para eliminar elementos.
+    pop(clave, valor_defecto) elimina y retorna el valor, 
+    o retorna valor_defecto si la clave no existe.
+    """
+    # Docstring explicando el comportamiento del método pop()
+    
+    print("=== SECCIÓN 4: Eliminar elementos con pop() ===")
+    # Título de la sección
+    
+    # Simulación de una rifa
+    # Comentario explicando el contexto del ejemplo
+    raffle = {
+        # Diccionario que simula una rifa con números y premios
+        223842: "Teddy Bear",
+        # Número 223842 gana un oso de peluche
+        872921: "Concert Tickets", 
+        # Número 872921 gana boletos de concierto
+        320291: "Gift Basket",
+        # Número 320291 gana una canasta de regalos
+        412123: "Necklace",
+        # Número 412123 gana un collar
+        298787: "Pasta Maker"
+        # Número 298787 gana una máquina para hacer pasta
+    }
+    # Fin de la definición del diccionario raffle
+    
+    print("Rifa inicial:", raffle)
+    # Muestra el estado inicial del diccionario
+    
+    # pop() elimina la clave y retorna su valor
+    # Comentario explicando qué hace pop()
+    prize1 = raffle.pop(320291, "No Prize")
+    # Elimina la clave 320291 del diccionario y guarda su valor en prize1
+    print(f"Premio ganado: {prize1}")
+    # Imprime el premio obtenido ("Gift Basket")
+    print("Después de sacar 320291:", raffle)
+    # Muestra el diccionario después de eliminar la clave 320291
+    
+    # Si la clave no existe, retorna el valor por defecto
+    # Comentario explicando qué pasa con claves inexistentes
+    prize2 = raffle.pop(100000, "No Prize")
+    # Intenta eliminar la clave 100000 (no existe), retorna "No Prize"
+    print(f"Intento con clave inexistente: {prize2}")
+    # Imprime "No Prize" porque la clave no existía
+    
+    # Otro ejemplo práctico: sistema de inventario en videojuego
+    # Comentario introduciendo un nuevo ejemplo práctico
+    print("\n--- Sistema de inventario ---")
+    # Imprime un subtítulo con línea nueva antes
+    available_items = {
+        # Diccionario simulando inventario de un videojuego
+        "health potion": 10,
+        # Poción de salud que restaura 10 puntos
+        "cake of the cure": 5,
+        # Pastel curativo que restaura 5 puntos
+        "green elixir": 20,
+        # Elixir verde que restaura 20 puntos
+        "strength sandwich": 25,
+        # Sandwich de fuerza que restaura 25 puntos
+        "stamina grains": 15,
+        # Granos de resistencia que restauran 15 puntos
+        "power stew": 30
+        # Guiso de poder que restaura 30 puntos
+    }
+    # Fin de la definición del inventario
+    
+    health_points = 20
+    # Variable que representa los puntos de salud actuales del jugador
+    print(f"Puntos de salud iniciales: {health_points}")
+    # Muestra los puntos de salud iniciales
+    
+    # Usar objetos del inventario (los elimina al usarlos)
+    # Comentario explicando que usar objetos los elimina del inventario
+    health_points += available_items.pop("stamina grains", 0)
+    # Elimina "stamina grains" del inventario, suma su valor (15) a health_points
+    health_points += available_items.pop("power stew", 0)
+    # Elimina "power stew" del inventario, suma su valor (30) a health_points
+    health_points += available_items.pop("mystic bread", 0)
+    # Intenta eliminar "mystic bread" (no existe), suma 0 a health_points
+    
+    print(f"Inventario después de usar objetos: {available_items}")
+    # Muestra el inventario después de usar los objetos
+    print(f"Puntos de salud finales: {health_points}")
+    # Muestra los puntos de salud finales (20 + 15 + 30 + 0 = 65)
+    print()
+    # Línea en blanco
+
+# =============================================================================
+# SECCIÓN 5: OBTENER CLAVES Y VALORES
+# =============================================================================
+# Separador para la quinta sección
+
+def claves_y_valores():
+    # Define la función claves_y_valores sin parámetros
+    """
+    Demuestra cómo obtener todas las claves, valores o ambos.
+    keys(), values(), items() retornan vistas dinámicas del diccionario.
+    """
+    # Docstring explicando los métodos keys(), values() e items()
+    
+    print("=== SECCIÓN 5: Trabajar con claves y valores ===")
+    # Título de la sección
+    
+    test_scores = {
+        # Diccionario con calificaciones de estudiantes (listas de números)
+        "Grace": [80, 72, 90],
+        # Grace tiene calificaciones: 80, 72, 90
+        "Jeffrey": [88, 68, 81], 
+        # Jeffrey tiene calificaciones: 88, 68, 81
+        "Sylvia": [80, 82, 84],
+        # Sylvia tiene calificaciones: 80, 82, 84
+        "Pedro": [98, 96, 95],
+        # Pedro tiene calificaciones: 98, 96, 95
+        "Martin": [78, 80, 78],
+        # Martin tiene calificaciones: 78, 80, 78
+        "Dina": [64, 60, 75]
+        # Dina tiene calificaciones: 64, 60, 75
+    }
+    # Fin de la definición del diccionario de calificaciones
+    
+    # OBTENER CLAVES
+    # Comentario indicando que se trabajará con las claves del diccionario
+    print("Lista de estudiantes:", list(test_scores.keys()))
+    # Convierte las claves del diccionario en una lista e imprime los nombres
+    
+    print("\nIterando sobre claves:")
+    # Imprime un subtítulo con línea nueva antes
+    for student in test_scores.keys():
+        # Itera sobre cada clave (nombre de estudiante) en el diccionario
+        print(f"  - {student}")
+        # Imprime cada nombre de estudiante con formato de lista
+    
+    # OBTENER VALORES  
+    # Comentario indicando que se trabajará con los valores del diccionario
+    print("\nTodas las puntuaciones:")
+    # Subtítulo para mostrar todas las puntuaciones
+    for score_list in test_scores.values():
+        # Itera sobre cada valor (lista de calificaciones) en el diccionario
+        print(f"  {score_list}")
+        # Imprime cada lista de calificaciones
+    
+    # Ejemplo práctico: sumar todos los valores
+    # Comentario introduciendo un ejemplo de suma de valores
+    num_exercises = {
+        # Diccionario con número de ejercicios por tema
+        "functions": 10,
+        # Tema "functions" tiene 10 ejercicios
+        "syntax": 13,
+        # Tema "syntax" tiene 13 ejercicios
+        "control flow": 15,
+        # Tema "control flow" tiene 15 ejercicios
+        "loops": 22,
+        # Tema "loops" tiene 22 ejercicios
+        "lists": 19,
+        # Tema "lists" tiene 19 ejercicios
+        "classes": 18,
+        # Tema "classes" tiene 18 ejercicios
+        "dictionaries": 18
+        # Tema "dictionaries" tiene 18 ejercicios
+    }
+    # Fin de la definición del diccionario de ejercicios
+    
+    total_exercises = sum(num_exercises.values())
+    # Suma todos los valores del diccionario (todos los números de ejercicios)
+    print(f"\nTotal de ejercicios disponibles: {total_exercises}")
+    # Imprime el total calculado
+    print()
+    # Línea en blanco
+
+# =============================================================================
+# SECCIÓN 6: OBTENER PARES CLAVE-VALOR CON ITEMS()
+# =============================================================================
+# Separador para la sexta sección
+
+def mostrar_items():
+    # Define la función mostrar_items sin parámetros
+    """
+    Demuestra el uso de items() para iterar sobre pares clave-valor.
+    Muy útil para procesar tanto claves como valores simultáneamente.
+    """
+    # Docstring explicando la utilidad del método items()
+    
+    print("=== SECCIÓN 6: Trabajar con pares clave-valor ===")
+    # Título de la sección
+    
+    biggest_brands = {
+        # Diccionario con valuaciones de marcas en miles de millones
+        "Apple": 184,
+        # Apple vale 184 mil millones
+        "Google": 141.7,
+        # Google vale 141.7 mil millones
+        "Microsoft": 80,
+        # Microsoft vale 80 mil millones
+        "Coca-Cola": 69.7,
+        # Coca-Cola vale 69.7 mil millones
+        "Amazon": 64.8
+        # Amazon vale 64.8 mil millones
+    }
+    # Fin de la definición del diccionario de marcas
+    
+    print("Valuaciones de marcas (en miles de millones USD):")
+    # Subtítulo explicando qué se va a mostrar
+    for company, value in biggest_brands.items():
+        # Itera sobre cada par clave-valor del diccionario
+        # company recibe la clave, value recibe el valor
+        print(f"  💰 {company} tiene un valor de ${value} mil millones")
+        # Imprime cada empresa con su valuación usando formato de string
+    
+    # Ejemplo con estadísticas
+    # Comentario introduciendo otro ejemplo
+    pct_women_in_occupation = {
+        # Diccionario con porcentajes de mujeres por profesión
+        "CEO": 28,
+        # 28% de CEOs son mujeres
+        "Engineering Manager": 9,
+        # 9% de managers de ingeniería son mujeres
+        "Pharmacist": 58,
+        # 58% de farmacéuticos son mujeres
+        "Physician": 40,
+        # 40% de médicos son mujeres
+        "Lawyer": 37,
+        # 37% de abogados son mujeres
+        "Aerospace Engineer": 9
+        # 9% de ingenieros aeroespaciales son mujeres
+    }
+    # Fin de la definición del diccionario de estadísticas
+    
+    print("\nPorcentaje de mujeres por profesión:")
+    # Subtítulo con línea nueva antes
+    for occupation, percentage in pct_women_in_occupation.items():
+        # Itera sobre cada par profesión-porcentaje
+        emoji = "👩‍💼" if percentage >= 40 else "📊"
+        # Asigna emoji según el porcentaje: 👩‍💼 si ≥40%, 📊 si <40%
+        print(f"  {emoji} {percentage}% de {occupation}s son mujeres")
+        # Imprime cada profesión con su porcentaje y emoji correspondiente
+    print()
+    # Línea en blanco
+
+# =============================================================================
+# SECCIÓN 7: EJEMPLOS ADICIONALES Y MEJORES PRÁCTICAS
+# =============================================================================
+# Separador para la séptima sección
+
+def ejemplos_avanzados():
+    # Define la función ejemplos_avanzados sin parámetros
+    """
+    Ejemplos adicionales con mejores prácticas para diccionarios.
+    """
+    # Docstring describiendo el contenido de esta función
+    
+    print("=== SECCIÓN 7: Ejemplos avanzados ===")
+    # Título de la sección
+    
+    # 1. Contar elementos con get()
+    # Comentario numerado explicando el primer ejemplo avanzado
+    texto = "python es genial y python es poderoso"
+    # String de ejemplo que contiene palabras repetidas
+    contador_palabras = {}
+    # Diccionario vacío para contar frecuencia de palabras
+    
+    for palabra in texto.split():
+        # Divide el texto en palabras y itera sobre cada una
+        contador_palabras[palabra] = contador_palabras.get(palabra, 0) + 1
+        # Si la palabra existe, obtiene su cuenta actual; si no, usa 0. Luego suma 1
+    
+    print("Contador de palabras:")
+    # Subtítulo para mostrar los resultados
+    for palabra, cuenta in contador_palabras.items():
+        # Itera sobre cada par palabra-cuenta en el diccionario contador
+        print(f"  '{palabra}': {cuenta}")
+        # Imprime cada palabra con su frecuencia
+    
+    # 2. Diccionario de diccionarios (estructura anidada)
+    # Comentario numerado explicando el segundo ejemplo
+    estudiantes = {
+        # Diccionario donde cada valor es otro diccionario (estructura anidada)
+        "Ana": {"edad": 20, "carrera": "Ingeniería", "promedio": 8.5},
+        # Ana es clave, su valor es un diccionario con edad, carrera y promedio
+        "Luis": {"edad": 22, "carrera": "Medicina", "promedio": 9.0},
+        # Luis es clave, su valor es un diccionario con edad, carrera y promedio
+        "María": {"edad": 19, "carrera": "Arte", "promedio": 8.8}
+        # María es clave, su valor es un diccionario con edad, carrera y promedio
+    }
+    # Fin de la definición del diccionario anidado
+    
+    print("\nInformación de estudiantes:")
+    # Subtítulo con línea nueva antes
+    for nombre, info in estudiantes.items():
+        # Itera sobre cada estudiante (nombre) y su información (diccionario)
+        print(f"  {nombre}: {info['edad']} años, {info['carrera']}, promedio: {info['promedio']}")
+        # Accede a los valores del diccionario interno usando sus claves
+    
+    # 3. Usar setdefault() para inicializar listas
+    # Comentario numerado explicando el tercer ejemplo
+    grupos = {}
+    # Diccionario vacío para agrupar estudiantes por carrera
+    estudiantes_por_carrera = [
+        # Lista de tuplas con información estudiante-carrera
+        ("Ana", "Ingeniería"), ("Luis", "Medicina"), ("María", "Arte"),
+        # Tres tuplas con nombre y carrera de cada estudiante
+        ("Pedro", "Ingeniería"), ("Sofia", "Medicina")
+        # Dos tuplas más con nombre y carrera
+    ]
+    # Fin de la definición de la lista de tuplas
+    
+    for nombre, carrera in estudiantes_por_carrera:
+        # Itera sobre cada tupla (nombre, carrera)
+        grupos.setdefault(carrera, []).append(nombre)
+        # setdefault crea la clave con lista vacía si no existe, luego agrega el nombre
+    
+    print("\nEstudiantes agrupados por carrera:")
+    # Subtítulo con línea nueva antes
+    for carrera, estudiantes in grupos.items():
+        # Itera sobre cada carrera y su lista de estudiantes
+        print(f"  {carrera}: {', '.join(estudiantes)}")
+        # Une los nombres con comas y los imprime por carrera
+    print()
+    # Línea en blanco final
+
+# =============================================================================
+# FUNCIÓN PRINCIPAL Y MENÚ INTERACTIVO
+# =============================================================================
+# Separador para la sección del menú
+
+def mostrar_menu():
+    # Define función para mostrar las opciones del menú
+    """Muestra el menú de opciones disponibles."""
+    # Docstring breve describiendo qué hace la función
+    
+    print("🐍 TUTORIAL DE DICCIONARIOS EN PYTHON 🐍")
+    # Título principal del tutorial con emoji
+    print("=" * 50)
+    # Imprime una línea de 50 signos igual como separador
+    print("1. Acceso básico a valores")
+    # Opción 1 del menú
+    print("2. Verificación de claves y get()")
+    # Opción 2 del menú
+    print("3. get() con valores por defecto")
+    # Opción 3 del menú
+    print("4. Eliminar elementos con pop()")
+    # Opción 4 del menú
+    print("5. Trabajar con claves y valores")
+    # Opción 5 del menú
+    print("6. Pares clave-valor con items()")
+    # Opción 6 del menú
+    print("7. Ejemplos avanzados")
+    # Opción 7 del menú
+    print("8. Ejecutar todos los ejemplos")
+    # Opción 8 del menú para ejecutar todo
+    print("0. Salir")
+    # Opción 0 para salir del programa
+    print("=" * 50)
+    # Otra línea separadora de 50 signos igual
+
+def main():
+    # Define la función principal del programa
+    """
+    Función principal con menú interactivo para ejecutar ejemplos específicos.
+    """
+    # Docstring explicando que esta es la función principal interactiva
+    
+    funciones = {
+        # Diccionario que mapea números de opción con funciones
+        1: obtener_valores,
+        # Opción 1 ejecuta la función obtener_valores
+        2: obtener_con_comprobacion,
+        # Opción 2 ejecuta la función obtener_con_comprobacion
+        3: uso_get_seguro,
+        # Opción 3 ejecuta la función uso_get_seguro
+        4: eliminar_claves,
+        # Opción 4 ejecuta la función eliminar_claves
+        5: claves_y_valores,
+        # Opción 5 ejecuta la función claves_y_valores
+        6: mostrar_items,
+        # Opción 6 ejecuta la función mostrar_items
+        7: ejemplos_avanzados,
+        # Opción 7 ejecuta la función ejemplos_avanzados
+        8: lambda: [func() for func in [obtener_valores, obtener_con_comprobacion, 
+                   uso_get_seguro, eliminar_claves, claves_y_valores, 
+                   mostrar_items, ejemplos_avanzados]]
+        # Opción 8 ejecuta una función lambda que llama a todas las funciones en secuencia
+    }
+    # Fin de la definición del diccionario de funciones
+    
+    while True:
+        # Inicia un bucle infinito para el menú
+        mostrar_menu()
+        # Llama a la función que muestra el menú de opciones
+        try:
+            # Inicia bloque try para manejar errores de entrada
+            opcion = int(input("Selecciona una opción (0-8): "))
+            # Solicita al usuario que ingrese una opción y la convierte a entero
+            
+            if opcion == 0:
+                # Si el usuario elige 0 (salir)
+                print("¡Gracias por usar el tutorial! 👋")
+                # Mensaje de despedida
+                break
+                # Sale del bucle while (termina el programa)
+            elif opcion in funciones:
+                # Si la opción está en el diccionario de funciones
+                print(f"\n{'='*60}")
+                # Imprime separador con 60 signos igual y línea nueva antes
+                funciones[opcion]()
+                # Ejecuta la función correspondiente a la opción elegida
+                print(f"{'='*60}\n")
+                # Imprime separador con 60 signos igual y línea nueva después
+                input("Presiona Enter para continuar...")
+                # Pausa el programa esperando que el usuario presione Enter
+            else:
+                # Si la opción no está en el rango válido
+                print("❌ Opción no válida. Intenta de nuevo.")
+                # Mensaje de error para opción inválida
+                
+        except ValueError:
+            # Si el usuario ingresa algo que no se puede convertir a entero
+            print("❌ Por favor ingresa un número válido.")
+            # Mensaje de error para entrada no numérica
+        except KeyboardInterrupt:
+            # Si el usuario presiona Ctrl+C para interrumpir
+            print("\n\n¡Hasta luego! 👋")
+            # Mensaje de despedida con líneas nuevas
+            break
+            # Sale del bucle while (termina el programa)
+
+if __name__ == "__main__":
+    # Verifica si este archivo se está ejecutando directamente (no importado)
+    # Ejecutar el tutorial interactivo
+    # Comentario indicando qué se va a hacer
+    main()
+    # Llama a la función principal para iniciar el programa
