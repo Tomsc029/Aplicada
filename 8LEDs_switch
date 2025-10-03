@@ -1,0 +1,345 @@
+int leds[] = {32,33,25,26,27,14,12,13};
+int num_leds = 8;
+
+// Pin del switch/interruptor
+int switch_pin = 35;
+
+// Variables de estado
+bool sistema_activo = false;
+bool ultimo_estado_switch = false;
+int secuencia_actual = 0;
+unsigned long ultimo_tiempo = 0;
+int velocidad_secuencia = 200;  // Milisegundos entre cambios
+
+// ==================== FUNCIÓN SETUP (similar a __init__) ====================
+void setup() {
+  // Inicializar comunicación serial (para debug)
+  Serial.begin(115200);
+  Serial.println("Sistema de Control de LEDs Iniciado");
+  Serial.println("Presiona el switch para activar/desactivar");
+  
+  // Configurar pines de LEDs como salida
+  for (int i = 0; i < num_leds; i++) {
+    pinMode(leds[i], OUTPUT);
+    digitalWrite(leds[i], LOW);  // Apagar todos los LEDs al inicio
+  }
+  
+  // Configurar pin del switch como entrada con pull-up interno
+  pinMode(switch_pin, INPUT_PULLUP);
+  
+  Serial.println("Configuración completada\n");
+}
+
+// ==================== FUNCIONES AUXILIARES ====================
+
+// Función para apagar todos los LEDs (similar a una función def en Python)
+void apagar_todos_leds() {
+  for (int i = 0; i < num_leds; i++) {
+    digitalWrite(leds[i], LOW);
+  }
+}
+
+// Función para encender todos los LEDs
+void encender_todos_leds() {
+  for (int i = 0; i < num_leds; i++) {
+    digitalWrite(leds[i], HIGH);
+  }
+}
+
+// Función para leer el estado del switch con debounce
+bool leer_switch() {
+  // Leer el estado del pin (invertido porque usamos INPUT_PULLUP)
+  bool estado = !digitalRead(switch_pin);
+  delay(50);  // Debounce simple
+  return estado;
+}
+
+// ==================== SECUENCIAS DE LEDs ====================
+
+// Secuencia 1: Encendido secuencial (como un for en Python)
+void secuencia_encendido_secuencial() {
+  static int led_actual = 0;
+  
+  apagar_todos_leds();
+  digitalWrite(leds[led_actual], HIGH);
+  
+  led_actual++;
+  if (led_actual >= num_leds) {
+    led_actual = 0;
+  }
+  
+  Serial.print("Secuencia 1 - LED: ");
+  Serial.println(led_actual);
+}
+
+// Secuencia 2: Ida y vuelta (efecto rebote)
+void secuencia_ida_vuelta() {
+  static int led_actual = 0;
+  static int direccion = 1;  // 1 = adelante, -1 = atrás
+  
+  apagar_todos_leds();
+  digitalWrite(leds[led_actual], HIGH);
+  
+  led_actual += direccion;
+  
+  // Cambiar dirección en los extremos
+  if (led_actual >= num_leds - 1 || led_actual <= 0) {
+    direccion = -direccion;
+  }
+  
+  Serial.print("Secuencia 2 - LED: ");
+  Serial.print(led_actual);
+  Serial.print(" Dirección: ");
+  Serial.println(direccion);
+}
+
+// Secuencia 3: Parpadeo alternado (pares e impares)
+void secuencia_parpadeo_alternado() {
+  static bool estado = false;
+  
+  apagar_todos_leds();
+  
+  // Encender LEDs pares o impares (similar a list comprehension en Python)
+  for (int i = 0; i < num_leds; i++) {
+    if (estado) {
+      // Encender pares
+      if (i % 2 == 0) {
+        digitalWrite(leds[i], HIGH);
+      }
+    } else {
+      // Encender impares
+      if (i % 2 != 0) {
+        digitalWrite(leds[i], HIGH);
+      }
+    }
+  }
+  
+  estado = !estado;
+  Serial.print("Secuencia 3 - Estado: ");
+  Serial.println(estado ? "Pares" : "Impares");
+}
+
+// Secuencia 4: Llenado progresivo
+void secuencia_llenado() {
+  static int leds_encendidos = 0;
+  static bool llenando = true;
+  
+  apagar_todos_leds();
+  
+  // Encender LEDs progresivamente
+  for (int i = 0; i < leds_encendidos; i++) {
+    digitalWrite(leds[i], HIGH);
+  }
+  
+  if (llenando) {
+    leds_encendidos++;
+    if (leds_encendidos > num_leds) {
+      llenando = false;
+      leds_encendidos = num_leds;
+    }
+  } else {
+    leds_encendidos--;
+    if (leds_encendidos < 0) {
+      llenando = true;
+      leds_encendidos = 0;
+    }
+  }
+  
+  Serial.print("Secuencia 4 - LEDs encendidos: ");
+  Serial.println(leds_encendidos);
+}
+
+// Secuencia 5: Efecto "Knight Rider" (3 LEDs móviles)
+void secuencia_knight_rider() {
+  static int posicion = 0;
+  static int direccion = 1;
+  
+  apagar_todos_leds();
+  
+  // Encender 3 LEDs consecutivos con intensidad variable (simulado)
+  for (int i = -1; i <= 1; i++) {
+    int led_index = posicion + i;
+    if (led_index >= 0 && led_index < num_leds) {
+      digitalWrite(leds[led_index], HIGH);
+    }
+  }
+  
+  posicion += direccion;
+  
+  if (posicion >= num_leds - 1 || posicion <= 0) {
+    direccion = -direccion;
+  }
+  
+  Serial.print("Secuencia 5 - Posición: ");
+  Serial.println(posicion);
+}
+
+// Secuencia 6: Parpadeo sincronizado
+void secuencia_parpadeo_total() {
+  static bool estado = false;
+  
+  if (estado) {
+    encender_todos_leds();
+  } else {
+    apagar_todos_leds();
+  }
+  
+  estado = !estado;
+  Serial.print("Secuencia 6 - Todos: ");
+  Serial.println(estado ? "ON" : "OFF");
+}
+
+// Secuencia 7: Encendido desde el centro
+void secuencia_desde_centro() {
+  static int distancia = 0;
+  static bool expandiendo = true;
+  
+  apagar_todos_leds();
+  
+  int centro = num_leds / 2;
+  
+  // Encender LEDs desde el centro
+  for (int i = 0; i <= distancia; i++) {
+    int led_izq = centro - i - 1;
+    int led_der = centro + i;
+    
+    if (led_izq >= 0) {
+      digitalWrite(leds[led_izq], HIGH);
+    }
+    if (led_der < num_leds) {
+      digitalWrite(leds[led_der], HIGH);
+    }
+  }
+  
+  if (expandiendo) {
+    distancia++;
+    if (distancia >= centro) {
+      expandiendo = false;
+    }
+  } else {
+    distancia--;
+    if (distancia < 0) {
+      expandiendo = true;
+      distancia = 0;
+    }
+  }
+  
+  Serial.print("Secuencia 7 - Distancia: ");
+  Serial.println(distancia);
+}
+
+// Secuencia 8: Patrón aleatorio
+void secuencia_aleatoria() {
+  apagar_todos_leds();
+  
+  // Encender 3 LEDs aleatorios (similar a random en Python)
+  for (int i = 0; i < 3; i++) {
+    int led_random = random(0, num_leds);
+    digitalWrite(leds[led_random], HIGH);
+  }
+  
+  Serial.println("Secuencia 8 - Patrón aleatorio");
+}
+
+// ==================== GESTOR DE SECUENCIAS ====================
+void ejecutar_secuencia() {
+  // Cambiar de secuencia cada 5 segundos
+  static unsigned long ultimo_cambio = 0;
+  unsigned long tiempo_actual = millis();
+  
+  if (tiempo_actual - ultimo_cambio >= 5000) {
+    secuencia_actual++;
+    if (secuencia_actual > 7) {
+      secuencia_actual = 0;
+    }
+    ultimo_cambio = tiempo_actual;
+    Serial.print("\n>>> Cambiando a Secuencia ");
+    Serial.print(secuencia_actual + 1);
+    Serial.println(" <<<\n");
+  }
+  
+  // Ejecutar la secuencia actual (similar a un switch-case o dict en Python)
+  switch (secuencia_actual) {
+    case 0:
+      secuencia_encendido_secuencial();
+      break;
+    case 1:
+      secuencia_ida_vuelta();
+      break;
+    case 2:
+      secuencia_parpadeo_alternado();
+      break;
+    case 3:
+      secuencia_llenado();
+      break;
+    case 4:
+      secuencia_knight_rider();
+      break;
+    case 5:
+      secuencia_parpadeo_total();
+      break;
+    case 6:
+      secuencia_desde_centro();
+      break;
+    case 7:
+      secuencia_aleatoria();
+      break;
+    default:
+      secuencia_actual = 0;
+  }
+}
+
+// ==================== LOOP PRINCIPAL (similar a while True en Python) ====================
+void loop() {
+  // Leer el estado del switch
+  bool estado_switch = leer_switch();
+  
+  // Detectar cambio de estado (similar a eventos en Python)
+  if (estado_switch && !ultimo_estado_switch) {
+    // Se presionó el switch
+    sistema_activo = !sistema_activo;
+    
+    if (sistema_activo) {
+      Serial.println("\n=== SISTEMA ACTIVADO ===");
+      secuencia_actual = 0;
+    } else {
+      Serial.println("\n=== SISTEMA DESACTIVADO ===");
+      apagar_todos_leds();
+    }
+  }
+  
+  ultimo_estado_switch = estado_switch;
+  
+  // Ejecutar secuencias si el sistema está activo
+  if (sistema_activo) {
+    unsigned long tiempo_actual = millis();
+    
+    // Control de tiempo (similar a time.sleep() pero no bloqueante)
+    if (tiempo_actual - ultimo_tiempo >= velocidad_secuencia) {
+      ejecutar_secuencia();
+      ultimo_tiempo = tiempo_actual;
+    }
+  }
+  
+  // Pequeña pausa para estabilidad
+  delay(10);
+}
+
+// ==================== FUNCIONES ADICIONALES ====================
+
+// Función para cambiar la velocidad de las secuencias
+void cambiar_velocidad(int nueva_velocidad) {
+  velocidad_secuencia = nueva_velocidad;
+  Serial.print("Velocidad cambiada a: ");
+  Serial.print(velocidad_secuencia);
+  Serial.println(" ms");
+}
+
+// Función para ejecutar una secuencia específica
+void ejecutar_secuencia_especifica(int numero_secuencia) {
+  if (numero_secuencia >= 0 && numero_secuencia <= 7) {
+    secuencia_actual = numero_secuencia;
+    Serial.print("Secuencia forzada a: ");
+    Serial.println(numero_secuencia + 1);
+  }
+}
