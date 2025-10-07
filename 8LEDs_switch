@@ -343,3 +343,52 @@ void ejecutar_secuencia_especifica(int numero_secuencia) {
     Serial.println(numero_secuencia + 1);
   }
 }
+
+
+
+
+
+
+
+
+
+// Define los pines para los 8 LEDs. 
+// Conectados en un rango de pines digitales del 2 al 9.
+int leds[] = {32, 33, 25, 26, 27, 14, 12, 13}; 
+int numLeds = 8; // Número total de LEDs
+int buttonState = 0;
+const int buttonPin = 35;
+
+void setup() {
+  pinMode(buttonPin, INPUT);
+  // Configura todos los pines de los LEDs como salidas.
+  for (int i = 0; i < numLeds; i++) {
+    pinMode(leds[i], OUTPUT);
+    
+  }
+
+}
+
+void loop() {
+  int buttonState = digitalRead(buttonPin);
+
+  if (buttonState == HIGH){
+  for (int i = 0; i < numLeds; i++) {
+    digitalWrite(leds[i], HIGH); // Enciende el LED
+    delay(100);                  // Mantiene encendido por un corto tiempo
+    digitalWrite(leds[i], LOW);  // Apaga el LED
+  }
+
+  // Secuencia: encender y apagar todos los LEDs en secuencia descendente.
+  for (int i = numLeds - 1; i >= 0; i--) {
+    digitalWrite(leds[i], HIGH); // Enciende el LED
+    delay(100);                  // Mantiene encendido por un corto tiempo
+    digitalWrite(leds[i], LOW);  // Apaga el LED
+    }
+  }
+  else {
+    for (int i = 0; i < numLeds; i++){
+    digitalWrite (leds[i], LOW);
+    }
+  } 
+}
