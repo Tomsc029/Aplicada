@@ -1,0 +1,53 @@
+from machine import Pin, PWM
+import time
+
+# Configuración de pines para el puente H
+IN1 = Pin(5, Pin.OUT)
+IN2 = Pin(6, Pin.OUT)
+ENA = PWM(Pin(9), freq=1000)  # PWM para control de velocidad
+
+# Velocidad inicial (0-1023 en MicroPython)
+velocidad = 800
+
+def adelante():
+    """Mover motor hacia adelante"""
+    IN1.value(1)
+    IN2.value(0)
+    ENA.duty(velocidad)
+    print("Motor: Adelante")
+
+def atras():
+    """Mover motor hacia atrás"""
+    IN1.value(0)
+    IN2.value(1)
+    ENA.duty(velocidad)
+    print("Motor: Atrás")
+
+def detener():
+    """Detener el motor"""
+    IN1.value(0)
+    IN2.value(0)
+    ENA.duty(0)
+    print("Motor: Detenido")
+
+def set_velocidad(vel):
+    """Ajustar velocidad (0-100%)"""
+    global velocidad
+    velocidad = int(vel * 1023 / 100)
+    ENA.duty(velocidad)
+    print(f"Velocidad: {vel}%")
+
+# Ejemplo de uso
+print("Control de Motor con Puente H - MicroPython")
+
+# Prueba del motor
+adelante()
+time.sleep(2)
+
+detener()
+time.sleep(1)
+
+atras()
+time.sleep(2)
+
+detener()
