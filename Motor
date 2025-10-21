@@ -1,53 +1,37 @@
-from machine import Pin, PWM
-import time
+#define ENA 18
+#define IN1 23
+#define IN2 22
 
-# Configuración de pines para el puente H
-IN1 = Pin(5, Pin.OUT)
-IN2 = Pin(6, Pin.OUT)
-ENA = PWM(Pin(9), freq=1000)  # PWM para control de velocidad
+#define BOTON_DERECHA 19
+#define BOTON_IZQUIERDA 21
 
-# Velocidad inicial (0-1023 en MicroPython)
-velocidad = 800
+void setup() {
+  pinMode(ENA, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
 
-def adelante():
-    """Mover motor hacia adelante"""
-    IN1.value(1)
-    IN2.value(0)
-    ENA.duty(velocidad)
-    print("Motor: Adelante")
+  pinMode(BOTON_DERECHA, INPUT_PULLUP);
+  pinMode(BOTON_IZQUIERDA, INPUT_PULLUP);
+}
 
-def atras():
-    """Mover motor hacia atrás"""
-    IN1.value(0)
-    IN2.value(1)
-    ENA.duty(velocidad)
-    print("Motor: Atrás")
+void loop() {
+  int derecha = digitalRead(BOTON_DERECHA);
+  int izquierda = digitalRead(BOTON_IZQUIERDA);
 
-def detener():
-    """Detener el motor"""
-    IN1.value(0)
-    IN2.value(0)
-    ENA.duty(0)
-    print("Motor: Detenido")
-
-def set_velocidad(vel):
-    """Ajustar velocidad (0-100%)"""
-    global velocidad
-    velocidad = int(vel * 1023 / 100)
-    ENA.duty(velocidad)
-    print(f"Velocidad: {vel}%")
-
-# Ejemplo de uso
-print("Control de Motor con Puente H - MicroPython")
-
-# Prueba del motor
-adelante()
-time.sleep(2)
-
-detener()
-time.sleep(1)
-
-atras()
-time.sleep(2)
-
-detener()
+  if (derecha == LOW && izquierda == HIGH) {
+    // Solo botón derecha presionado
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+    digitalWrite(ENA, HIGH);
+  }
+  else if (izquierda == LOW && derecha == HIGH) {
+    // Solo botón izquierda presionado
+    digitalWrite(IN1, LOW);
+    digitalWrite(IN2, HIGH);
+    digitalWrite(ENA, HIGH);
+  }
+  else {
+    // Ambos presionados o ninguno
+    digitalWrite(ENA, LOW);
+  }
+}
