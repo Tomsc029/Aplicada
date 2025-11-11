@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Mi Primer Intento</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--Main header-->
+    <h1>Este es...</h1>
+
+        <!--Secondary header-->
+    <h2> Mi Primer Intento</h2>
+
+    <table border = 2>
+        <tr>
+            <th>Nombres</th>
+            <th>Correo</th>
+            <th>Teléfono</th>
+
+        </tr>
+
+        <tr>
+            <td>Henry</td>
+            <td>henry@email.com</td>
+            <td>+573001111111</td>        
+                   
+        </tr>
+
+        <tr>
+           <td>Albert</td>
+           <td>alberto@email.com</td>
+           <td>+573002222222</td>        
+        </tr>
+    </table>
+
+<a href="http://google.com/" target="_blank">Ir a google </a>
+    <br>
+
+     <p>También se conoce con la palabra <b>"parágrafo"</b> y no es más que un
+        texto que está compuesto por varias <b> <i> consecutivamente </i></b>, 
+        logrando abordar un mismo tema. ¡De hecho esto que estás leyendo justo ahora 
+        podría decirse que es un párrafo y su ejemplo! Ahora bien, ten presente que 
+        las letras forman palabras y las palabras oraciones, es decir, que las oraciones 
+        formarán párrafos. Es sencillo, ¿No? Recuerda <u> estos textos </u> siempre empiezan 
+        con una letra mayúscula y que, si hay un punto y seguido, nuevamente se verá una 
+        letra en mayúscula. Otro aspecto a considerar es que un párrafo termina justo cuando 
+        la idea ya se desarrolló completamente, o simplemente, porque el tema ya se finiquitó.</p>
+
+     <img src = "img/html.png" alt = "html" wigth = 100>
+
+     <img src = "https://loremflickr.com/320/240/brazil" alt = "imagenes de la web" wigth = 100>
+
+    </body>
+</html>
