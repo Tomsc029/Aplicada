@@ -1,58 +1,90 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Mi Primer Intento</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--Main header-->
-    <h1>Este es...</h1>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Página de introducción a HTML">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi Primer Intento</title>
+  <style>
+    body {
+      background-color: #f0f8ff;
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    table {
+      border-collapse: collapse;
+      width: 60%;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 2px solid #3498db;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #2980b9;
+      color: white;
+    }
+    img {
+      width: 150px;
+      margin-right: 10px;
+    }
+    .imagenes {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
 
-        <!--Secondary header-->
-    <h2> Mi Primer Intento</h2>
+  <h1>ESTE ES...</h1>
+  <h2>MI PRIMER INTENTO</h2>
 
-    <table border = 2>
-        <tr>
-            <th>Nombres</th>
-            <th>Correo</th>
-            <th>Teléfono</th>
+  <p><b>¿Cuál es su propósito?: </b> Esta página web tiene como propósito introducir los conceptos básicos de <b><i>HTML</i></b>. Aquí aprenderás a usar <u>encabezados, tablas, enlaces, párrafos</u> e <u>imágenes</u>. Es ideal para quienes están dando sus primeros pasos en el desarrollo web. ¡Explora cada sección y observa cómo se estructura una página desde cero!</p>
 
-        </tr>
+    <h3>Imágenes de ejemplo:</h3>
+  <div class="imagenes">
+   <style>
+  .imagenes {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px; /* espacio entre imágenes y tabla */
+  }
+   </style>
+    <img src="https://loremflickr.com/320/240/brazil" alt="imagenes de la web">
+    <img src="https://www.posicionamientowebentenerife.com/posicionamiento-web-tenerife/HTML.jpg" alt="Qué es HTML">
+  </div>
 
-        <tr>
-            <td>Henry</td>
-            <td>henry@email.com</td>
-            <td>+573001111111</td>        
-                   
-        </tr>
+    <h4>Tabla de contactos y ejemplificación:</h4>
+  <table>
+    <tr>
+      <th>Nombre</th>
+      <th>Correo Electrónico</th>
+      <th>Teléfono</th>
+    </tr>
+    <tr>
+      <td>Tomas</td>
+      <td>tomas@gmail.com</td>
+      <td>+573168038067</td>
+    </tr>
+    <tr>
+      <td>Esteban</td>
+      <td>esteban@gmail.com</td>
+      <td>+573019812873</td>
+    </tr>
+  </table>
 
-        <tr>
-           <td>Albert</td>
-           <td>alberto@email.com</td>
-           <td>+573002222222</td>        
-        </tr>
-    </table>
+    <h5>Enlace de ejemplo:</h5>
+  <a href="http://google.com/" target="_blank">Ir a Google</a>
 
-<a href="http://google.com/" target="_blank">Ir a google </a>
-    <br>
-
-     <p>También se conoce con la palabra <b>"parágrafo"</b> y no es más que un
-        texto que está compuesto por varias <b> <i> consecutivamente </i></b>, 
-        logrando abordar un mismo tema. ¡De hecho esto que estás leyendo justo ahora 
-        podría decirse que es un párrafo y su ejemplo! Ahora bien, ten presente que 
-        las letras forman palabras y las palabras oraciones, es decir, que las oraciones 
-        formarán párrafos. Es sencillo, ¿No? Recuerda <u> estos textos </u> siempre empiezan 
-        con una letra mayúscula y que, si hay un punto y seguido, nuevamente se verá una 
-        letra en mayúscula. Otro aspecto a considerar es que un párrafo termina justo cuando 
-        la idea ya se desarrolló completamente, o simplemente, porque el tema ya se finiquitó.</p>
-
-     <img src = "img/html.png" alt = "html" wigth = 100>
-
-     <img src = "https://loremflickr.com/320/240/brazil" alt = "imagenes de la web" wigth = 100>
-
-    </body>
+</body>
 </html>
