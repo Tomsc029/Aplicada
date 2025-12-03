@@ -1,8 +1,8 @@
 #include <WiFi.h>
 #include <WebServer.h>
 
-const char* ssid = "Familia Cruz";
-const char* password = "Alfalfa01";
+const char* ssid = "SSS";
+const char* password = "SSS";
 
 #define ENA 18
 #define IN1 19
