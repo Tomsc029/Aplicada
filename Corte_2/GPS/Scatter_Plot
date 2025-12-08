@@ -1,0 +1,32 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import random
+
+# Simulación de 9 puntos GPS alrededor de Bogotá
+lat_base = 4.609  # Latitud base
+lon_base = -74.081  # Longitud base
+
+datos = []
+for i in range(9):
+    lat = lat_base + random.uniform(-0.005, 0.005)  # variación pequeña
+    lon = lon_base + random.uniform(-0.005, 0.005)
+    datos.append({'Punto': i+1, 'Latitud': lat, 'Longitud': lon})
+
+# Guardar en CSV
+df = pd.DataFrame(datos)
+df.to_csv('gps_simulado.csv', index=False)
+print("✅ Datos simulados guardados en gps_simulado.csv")
+
+# Graficar scatter plot
+plt.figure(figsize=(6,6))
+plt.scatter(df['Longitud'], df['Latitud'], color='blue', marker='o')
+
+# Etiquetas de cada punto
+for i, row in df.iterrows():
+    plt.text(row['Longitud'], row['Latitud'], str(row['Punto']), fontsize=9, ha='right')
+
+plt.xlabel('Longitud')
+plt.ylabel('Latitud')
+plt.title('Simulación de puntos GPS (9 muestras)')
+plt.grid(True)
+plt.show()
